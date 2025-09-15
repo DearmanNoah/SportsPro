@@ -1,0 +1,38 @@
+﻿@model IncidentsViewModel
+@{
+	string title = Model.Action + "Incident"; ViewData["Title"] = title;
+}
+<h2>@ViewBag.Title</h2>
+<form asp-action="Edit" method="post">
+	<div asp-validation-summary="All" class="text-danger"></div> 
+	
+	<div class="mb-3">
+		<input type="hidden" asp-for="CIncident.IncidentID" />
+		<label asp-for="CIncident.CustomerID" class="form-label">Customer</label> <custom-select asp-for="CIncident.CustomerID" 
+		class="form-select">
+			<option value="">select a customer...</option>
+		</custom-select>
+	</div> <div class="mb-3">
+		<label asp-for="CIncident.ProductID" class="form-label">Product</label> <custom-select asp-for="CIncident.ProductID"
+		class="form-select">
+		<option value="">select a product...</option>
+		</custom-select>
+		<label asp-for="CIncident.Title" class="form-label">Title</label> <input asp-for="CIncident.Title" class="form-control">
+	</div> <div class="mb-3">
+		<label asp-for="CIncident.Description" class="form-label">Description</label> <input asp-for="CIncident.Description" class="form-control">
+	</div> 
+	<div class="mb-3">
+		<label asp-for="CIncident.TechnicianID" class="form-label">Technician</label> <custom-select asp-for="CIncident.TechnicianID"
+		class="form-select">
+		<option value="">select a technician...</option>
+		</custom-select>
+	</div> <div class="mb-3">
+		<label asp-for="CIncident.DateOpened" class="form-label">DateOpened</label> <input asp-for="CIncident.DateOpened" class="form-control">
+	</div> 
+	<div class="mb-3">
+		<label asp-for="CIncident.DateClosed" class="form-label">DateClosed</label> <input asp-for="CIncident.DateClosed" class="form-control">
+	</div>
+	<button type="submit" class="btn btn-primary">Save</button> <a asp-controller="Incident" asp-action="List" class="btn btn-primary">Cancel</a>
+</form>
+
+<partial name="_Scripts" />

@@ -1,0 +1,22 @@
+﻿@model CustomersViewModel
+@{
+	ViewData["Title"] = "List By Customer";
+}
+
+<div>
+	<h2>Get Customer</h2>
+	<form asp-action="ListByCustomer" method="post">
+		@if (TempData.Keys.Contains("error"))
+		{
+			<h3 class="text-danger">You must select a customer.</h3>
+		}
+		<div class="mb-3">
+			<select asp-for="CCustomer.CustomerID"
+					asp-items="@(new SelectList(Model.Customers,"CustomerID","FullName"))"
+	 class="form-select">
+				<option value="">select a customer...</option>
+			</select>
+		</div>
+		<button type="submit" class="btn btn-primary">Select</button>
+	</form>
+</div>

@@ -1,0 +1,45 @@
+﻿@model List<Technician>
+
+@{
+	ViewData["Title"] = "Tech Manager";
+}
+
+<div class="mb-2">
+	<h1>Tech Manager</h1>
+</div>
+
+<table class="table table-bordered table-striped">
+	<thead>
+		<tr>
+			<th>TechnicianID</th>
+			<th>Name</th>
+			<th>Email</th>
+			<th>Phone</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var technician in Model)
+		{
+			if (technician.TechnicianID != -1)
+			{
+				<tr>
+					<td>@technician.TechnicianID</td>
+					<td>@technician.Name</td>
+					<td>@technician.Email</td>
+					<td>@technician.Phone</td>
+					<td>
+						<a asp-controller="Technician" asp-action="Edit"
+				   asp-route-id="@technician.TechnicianID" class="btn btn-primary rounded">Edit</a>
+						<a asp-controller="Technician" asp-action="Delete"
+				   asp-route-id="@technician.TechnicianID" class="btn btn-primary rounded">Delete</a>
+					</td>
+				</tr>
+			}
+		}
+	</tbody>
+</table>
+
+<div class="mb-2">
+	<a asp-controller="Technician" asp-action="Add" class="btn btn-primary rounded">Add New Technician</a>
+</div>

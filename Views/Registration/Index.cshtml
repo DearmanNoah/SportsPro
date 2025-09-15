@@ -1,0 +1,59 @@
+﻿@model CustomersViewModel
+@{
+	ViewData["Title"] = "Registration List";
+}
+<h1 class="mb-3">Customer: @(Model.CustomerName)</h1>
+
+<h1 class="mb-1">Registrations</h1>
+<table class="table table-bordered table-striped mb-3">
+	<thead>
+		<tr>
+			<th>Product</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var customer in Model.Customers)
+		{
+			if (customer.Products == null || !customer.Products.Any())
+			{
+				<tr>
+					<td class="text-center">No registered products for this customer.</td>
+				</tr>
+			}
+			else
+			{
+				@foreach (var product in customer.Products)
+				{
+					<tr>
+						<td>@product.ProductCode</td>
+						<td>
+							<form asp-action="Delete" method="post">
+								<input type="hidden" name="id" value="@customer.CustomerID" />
+								<input type="hidden" name="id2" value="@product.ProductID" />
+								<button type="submit" class="btn btn-primary">Delete</button>
+							</form>
+						</td>
+					</tr>
+				}
+			}
+		}
+	</tbody>
+</table>
+
+<h1 class="mb-1">Product</h1>
+<form asp-action="RegisterProduct" method="post">
+	@if (TempData.Keys.Contains("error"))
+	{
+		<h3 class="text-danger">@TempData["error"]</h3>
+	}
+	<div class="mb-3">
+		<input type="hidden" asp-for="CCustomer.CustomerID" value="@Model.Customers.FirstOrDefault()?.CustomerID" />
+		<select asp-for="CProduct.ProductID"
+				asp-items="@(new SelectList(Model.Products,"ProductID","ProductCode"))"
+	class="form-select">
+			<option value="">select a product...</option>
+		</select>
+	</div>
+	<button type="submit" class="btn btn-primary">Register</button>
+</form>

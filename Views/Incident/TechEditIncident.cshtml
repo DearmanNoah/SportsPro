@@ -1,0 +1,44 @@
+﻿@model IncidentsViewModel
+@{
+	string title =  Model.Action + " Incident"; ViewData["Title"] = title;
+}
+<h2>@ViewBag.Title</h2>
+<form asp-action="TechEdit" method="post">
+	<div asp-validation-summary="All" class="text-danger"></div>
+
+	<div class="mb-3">
+	<input type="hidden" asp-for="CIncident.IncidentID" />
+	<label asp-for="CIncident.TechnicianID" class="form-label float-start">Technician</label>
+	<input type="hidden" asp-for="CIncident.TechnicianID" />
+	<label class="text-center ms-3 float-start">@Model.CIncident.Technician.Name</label>
+	<div style="clear: both;"></div>
+	</div> <div class="mb-3">
+		<label asp-for="CIncident.CustomerID" class="form-label float-start">Customer:</label>
+		<input type="hidden" asp-for="CIncident.CustomerID"/>
+		<label class="text-center ms-3 float-start">@Model.CIncident.Customer.FullName</label>
+		<div style="clear: both;"></div>
+	</div> <div class="mb-3">
+		<label asp-for="CIncident.ProductID" class="form-label float-start">Product:</label>
+		<input type="hidden" asp-for="CIncident.ProductID"/>
+		<label class="text-center ms-3 float-start">@Model.CIncident.Product.Name</label>
+		<div style="clear: both;"></div>
+	</div> <div class="mb-3">
+		<label asp-for="CIncident.Title" class="form-label float-start">Title:</label> 
+		<input type="hidden" asp-for="CIncident.Title"/>
+		<label class="text-center ms-3 float-start">@Model.CIncident.Title</label>
+		<div style="clear: both;"></div>
+	</div> <div class="mb-3">
+		<label asp-for="CIncident.DateOpened" class="form-label float-start">DateOpened:</label>
+		<input type="hidden" asp-for="CIncident.DateOpened" />
+		<label class="text-center ms-3 float-start">@Model.CIncident.DateOpened</label>
+		<div style="clear: both;"></div>
+	</div> <div class="mb-3">
+		<label asp-for="CIncident.Description" class="form-label float-start">Description:</label> <input asp-for="CIncident.Description" class="form-control p-1 float-start">
+		<div style="clear: both;"></div>
+	</div> <div class="mb-3">
+		<label asp-for="CIncident.DateClosed" class="form-label float-start">DateClosed:</label> <input asp-for="CIncident.DateClosed" class="form-control p-1 float-start">
+	</div>
+	<button type="submit" class="btn btn-primary">Save</button> <a asp-controller="Incident" asp-action="TechList" class="btn btn-primary">Cancel</a>
+</form>
+
+<partial name="_Scripts" />
